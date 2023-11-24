@@ -67,43 +67,33 @@ Inside the `llama.cpp` directory, build it:
 
 ## Converting the Downloaded Models
 
-1. Navigate back to the `llama.cpp` repository:
-
+1. **Navigate back to the `llama.cpp` repository**:
    ```bash
    cd llama.cpp
    ```
 
-2. Create a conda environment named `llama2`:
+2. **Create a conda environment named `llama2`**:
    ```bash
-
-  conda create --name llama2
-
+   conda create --name llama2
    ```
-   
-3. Activate the environment:
+
+3. **Activate the environment**:
    ```bash
    conda activate llama2
    ```
 
-4. Install Python dependencies:
-
+4. **Install Python dependencies**:
    ```bash
    python3 -m pip install -r requirements.txt
    ```
 
-5. Convert the model to f16 format:
-
+5. **Convert the model to f16 format**:
    ```bash
    python3 convert.py --outfile models/7B/ggml-model-f16.bin --outtype f16 ../llama2/llama-2-7b-chat --vocab-dir ../llama2
-
-# if you get error: Exception: Vocab size mismatch (model has -1, but
-
-# models/tokenizer.model has 32000). update 'params.json' in
-
-# '../llama2/llama-2-7b-chat' from -1 to 32000
-
    ```
-6. Quantize the model to reduce its size:
+   > **Note**: If you encounter an error about a vocab size mismatch (model has -1, but tokenizer.model has 32000), update `params.json` in `../llama2/llama-2-7b-chat` from -1 to 32000.
+
+6. **Quantize the model to reduce its size**:
    ```bash
    ./quantize ./models/7B/ggml-model-f16.bin ./models/7B/ggml-model-q4_0.bin q4_0
    ```
